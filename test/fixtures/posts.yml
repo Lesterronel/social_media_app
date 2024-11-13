@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  content: MyText
+  publish_date: 2024-11-12
+  active: false
+  featured: MyString
+  boolean: MyString
+  permalink: MyString
+
+two:
+  name: MyString
+  content: MyText
+  publish_date: 2024-11-12
+  active: false
+  featured: MyString
+  boolean: MyString
+  permalink: MyString
