@@ -6,4 +6,6 @@ devise_for :administrators,
 
 namespace :admin do
     get "dashboard/index"
+
+    resources :posts
 end

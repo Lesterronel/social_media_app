@@ -1,2 +1,19 @@
-h1 Admin::Dashboard#index
-p Find me in app/views/admin/dashboard/index.html.slim
+h1 Home
+
+- if current_administrator
+  = current_administrator.email
+- else
+  h2 No logged in administrator.
+h4 Featured Posts
+- @featured_posts.each do |post|
+  == render post
+  p
+    = link_to "Show this post", site_post_path(id: post.id)
+
+h1 Posts
+= link_to "New post", new_site_post_path
+#posts
+  - @active_posts.each do |post|
+    == render post
+    p
+      = link_to "Show this post", site_post_path(id: post.id)

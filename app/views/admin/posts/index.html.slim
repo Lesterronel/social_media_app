@@ -1,0 +1,16 @@
+p style="color: green" = notice
+
+h1 Posts
+
+- if current_user
+  = current_user.email
+- else
+  h2 No logged in user.
+
+#posts
+  - @posts.each do |post|
+    == render post
+    p
+      = link_to "Show this post", site_post_path(id: post.id)
+
+= link_to "New post", new_site_post_path
