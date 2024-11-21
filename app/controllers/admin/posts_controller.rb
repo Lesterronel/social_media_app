@@ -4,7 +4,8 @@ module Admin
 
     # GET /posts or /posts.json
     def index
-      @posts = Post.all
+      @has_records = Post.for_datatables.present?
+      @posts = Post.filter(params.slice(:name, :active), params[:order_by].presence).for_datatables
     end
 
     # GET /posts/1 or /posts/1.json
@@ -19,7 +20,6 @@ module Admin
 
     # GET /posts/1/edit
     def edit
-      
     end
 
     # POST /posts or /posts.json

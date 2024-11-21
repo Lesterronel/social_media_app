@@ -7,8 +7,18 @@ h1 Posts
 - else
   h2 No logged in admin.
 
-#posts
-  - @posts.each do |post|
-    == render post
-    p
-      = link_to "Show this post", admin_post_path(id: post.id)
+= form_with url: admin_posts_path, method: :get, data: { turbo_frame: 'posts' } do |f|
+  = f.text_field :name, placeholder: "Search", value: params[:name]
+  = f.select :active, options_for_select([['Active', true], ['Inactive', false]], params[:active]), include_blank: 'All'
+  = f.submit "Search"
+turbo-frame#posts
+  - if @has_records
+    - if @posts.present?
+      - @posts.each do |post|
+        == render post
+        p
+          = link_to "Show this post", admin_post_path(id: post.id), data: { turbo: false }
+    - else
+      p No posts found.
+  - else 
+    p No posts exists.
