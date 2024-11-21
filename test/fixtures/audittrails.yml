@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  module: MyString
+  event_type: MyString
+  current_data: MyText
+  old_data: MyText
+  data_differences: MyText
+  ip_address: 
+  modified_by_email: MyString
+  modified_by_name: MyString
+
+two:
+  module: MyString
+  event_type: MyString
+  current_data: MyText
+  old_data: MyText
+  data_differences: MyText
+  ip_address: 
+  modified_by_email: MyString
+  modified_by_name: MyString

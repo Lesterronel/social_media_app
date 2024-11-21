@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_14_140605) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_19_054634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_14_140605) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_administrators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true
+  end
+
+  create_table "audittrails", force: :cascade do |t|
+    t.string "module"
+    t.string "event_type"
+    t.text "current_data"
+    t.text "old_data"
+    t.text "data_differences"
+    t.inet "ip_address"
+    t.string "modified_by_email"
+    t.string "modified_by_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

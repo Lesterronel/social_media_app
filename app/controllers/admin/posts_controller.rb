@@ -19,9 +19,7 @@ module Admin
 
     # GET /posts/1/edit
     def edit
-      if @post.user_id != current_user.id
-        redirect_to site_post_path(id: @post.id), alert: "Post is not from this user." 
-      end
+      
     end
 
     # POST /posts or /posts.json
@@ -31,7 +29,7 @@ module Admin
 
       respond_to do |format|
         if @post.save
-          format.html { redirect_to site_post_path(id: @post.id), notice: "Post was successfully created." }
+          format.html { redirect_to admin_post_path(id: @post.id), notice: "Post was successfully created." }
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -42,7 +40,7 @@ module Admin
     def update
       respond_to do |format|
         if @post.update(post_params)
-          format.html { redirect_to site_post_path(id: @post.id), notice: "Post was successfully updated." }
+          format.html { redirect_to admin_post_path(id: @post.id), notice: "Post was successfully updated." }
         else
           format.html { render :edit, status: :unprocessable_entity }
         end
@@ -54,7 +52,7 @@ module Admin
       @post.destroy!
 
       respond_to do |format|
-        format.html { redirect_to site_posts_path, status: :see_other, notice: "Post was successfully destroyed." }
+        format.html { redirect_to admin_posts_path, status: :see_other, notice: "Post was successfully destroyed." }
       end
     end
 

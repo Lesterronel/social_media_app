@@ -1,0 +1,42 @@
+= form_with(model: audittrail) do |form|
+  - if audittrail.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(audittrail.errors.count, "error")} prohibited this audittrail from being saved:"
+      ul
+        - audittrail.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :module, style: "display: block"
+    = form.text_field :module
+
+  div
+    = form.label :event_type, style: "display: block"
+    = form.text_field :event_type
+
+  div
+    = form.label :current_data, style: "display: block"
+    = form.textarea :current_data
+
+  div
+    = form.label :old_data, style: "display: block"
+    = form.textarea :old_data
+
+  div
+    = form.label :data_differences, style: "display: block"
+    = form.textarea :data_differences
+
+  div
+    = form.label :ip_address, style: "display: block"
+    = form.text_field :ip_address
+
+  div
+    = form.label :modified_by_email, style: "display: block"
+    = form.text_field :modified_by_email
+
+  div
+    = form.label :modified_by_name, style: "display: block"
+    = form.text_field :modified_by_name
+
+  div
+    = form.submit

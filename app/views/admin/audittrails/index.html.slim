@@ -1,0 +1,9 @@
+p style="color: green" = notice
+
+h1 Audittrails
+
+#audittrails
+  - @audittrails.each do |audittrail|
+    == render audittrail
+    p
+      = link_to "Show this audittrail", admin_audittrail_path(id: audittrail.id)
