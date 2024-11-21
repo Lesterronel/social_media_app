@@ -1,15 +1,13 @@
 
-- if current_user
-  = current_user.email
+- if current_administrator
+  = current_administrator.email
 - else
-  h2 No logged in user.
+  h2 No logged in admin.
   
 == render @post
 
 div
-  => link_to "Edit this post", edit_site_post_path(@post)
+  => link_to "Edit this post", edit_admin_post_path(@post)
   '|
-  =< link_to "Back to posts", site_posts_path
-  - if current_user
-    - if @post.user_id == current_user.id
-      = button_to "Destroy this post", site_post_path(@post), method: :delete
+  =< link_to "Back to posts", admin_posts_path
+

@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @audittrail
+
+div
+  => link_to "Edit this audittrail", edit_audittrail_path(@audittrail)
+  '|
+  =< link_to "Back to audittrails", audittrails_path
+
+  = button_to "Destroy this audittrail", @audittrail, method: :delete

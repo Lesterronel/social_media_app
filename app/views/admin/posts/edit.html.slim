@@ -1,15 +1,15 @@
 h1 Editing post
 
-- if current_user
-  = current_user.email
+- if current_administrator
+  = current_administrator.email
 - else
-  h2 No logged in user.
+  h2 No logged in admin.
 
 == render "form", post: @post
 
 br
 
 div
-  => link_to "Show this post", site_post_path(@post)
+  => link_to "Show this post", admin_post_path(@post)
   '|
-  =< link_to "Back to posts", site_posts_path
+  =< link_to "Back to posts", admin_posts_path

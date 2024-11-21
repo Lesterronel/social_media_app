@@ -1,0 +1,10 @@
+h1 Editing audittrail
+
+== render "form", audittrail: @audittrail
+
+br
+
+div
+  => link_to "Show this audittrail", @audittrail
+  '|
+  =< link_to "Back to audittrails", audittrails_path
