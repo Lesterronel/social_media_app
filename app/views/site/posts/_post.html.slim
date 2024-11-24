@@ -1,3 +1,4 @@
+
 div id="#{dom_id post}"
   p
     strong User Name:
@@ -5,9 +6,11 @@ div id="#{dom_id post}"
   p
     strong Name:
     =< post.name
-  p
-    strong Content:
-    =< post.content
+  turbo-frame id="post_#{post.id}"
+    p
+      strong Content:
+      =< truncate(post.content, length: 8, separator: ' ', omission: '... ')
+      = link_to "Read more", content_full_site_post_path(post)
   p
     strong Publish date:
     =< post.publish_date
@@ -20,3 +23,18 @@ div id="#{dom_id post}"
   p
     strong Permalink:
     =< post.permalink
+  / p
+  /     = link_to "Show this post", site_post_path(id: post.id)
+  p 
+    strong Likes:
+    =< post.get_likes.size
+    
+  - if current_user
+    = button_to "Like", like_site_post_path(post), method: :patch
+    br
+    - if current_user.email == post.user.email
+      = button_to "Edit this post", edit_site_post_path(post), method: :post
+      = button_to "Destroy this post", site_post_path(post), method: :delete
+
+    
+

@@ -5,6 +5,11 @@ devise_for :users,
     }
 
 namespace :site, path: '/' do
-    
-    resources :posts
+    resources :posts do
+        member do
+            post :edit
+            get :content_full
+            patch :like
+        end
+    end
 end

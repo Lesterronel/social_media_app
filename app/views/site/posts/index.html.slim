@@ -1,16 +1,21 @@
-p style="color: green" = notice
+/ p style="color: green" = notice
 
 h1 Posts
 
+#new_post
+  = render partial: "form", locals: {post: Post.new}  
+br
+br
 - if current_user
-  = current_user.email
+  h2 Logged in user: #{current_user.email}
 - else
   h2 No logged in user.
+br
+br
 
 #posts
   - @posts.each do |post|
-    == render post
-    p
-      = link_to "Show this post", site_post_path(id: post.id)
+    = render post
+    br
 
 = link_to "New post", new_site_post_path

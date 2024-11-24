@@ -1,24 +1,54 @@
-p style="color: green" = notice
-
-h1 Posts
-
-- if current_administrator
-  = current_administrator.email
-- else
-  h2 No logged in admin.
-
-= form_with url: admin_posts_path, method: :get, data: { turbo_frame: 'posts' } do |f|
-  = f.text_field :name, placeholder: "Search", value: params[:name]
-  = f.select :active, options_for_select([['Active', true], ['Inactive', false]], params[:active]), include_blank: 'All'
-  = f.submit "Search"
 turbo-frame#posts
-  - if @has_records
-    - if @posts.present?
-      - @posts.each do |post|
-        == render post
-        p
-          = link_to "Show this post", admin_post_path(id: post.id), data: { turbo: false }
-    - else
-      p No posts found.
-  - else 
-    p No posts exists.
+  p style="color: green" = notice
+
+  h1 Posts
+
+  - if current_administrator
+    = current_administrator.email
+  - else
+    h2 No logged in admin.
+
+  = form_with url: admin_posts_path, method: :get, data: { turbo_frame: 'posts' } do |f|
+    = f.text_field :email, placeholder: "Search by email", value: params[:email]
+    = f.text_field :search_string, placeholder: "Search by title or content", value: params[:search_string]
+
+    = f.label :active, "Status"
+    = f.select :active, options_for_select([['Active', true], ['Inactive', false]], params[:active]), include_blank: 'All'
+
+    = f.label :featured, "Featured"
+    = f.select :featured, options_for_select([['Featured', true], ['Not Featured', false]], params[:featured]), include_blank: 'All'
+
+    = f.label :date_from, "Date From"
+    = f.date_field :date_from, value: params[:date_from]
+
+    = f.label :date_to, "Date To"
+    = f.date_field :date_to, value: params[:date_to]
+    = f.submit "Search"
+  br
+  br
+
+    / = render partial: "form", locals: {post: Post.new}  
+
+  table 
+    thead 
+      tr 
+        th = sortable("user_name", "User Name")
+        th = sortable("title", "Title")
+        th = sortable("content", "Content")
+        th = sortable("publish_date", "Publish Date")
+        th Active
+        th Featured
+        th = sortable("permalink", "Permalink")
+        th "Action" 
+    tbody 
+      - if @has_records
+        - if @posts.present?
+          - @posts.each do |post|
+            tr id="#{dom_id post}"
+              == render post
+              td 
+                = link_to "Show this post", admin_post_path(id: post.id), data: { turbo: false }
+        - else
+          p No posts found.
+      - else 
+        p No posts exists.
