@@ -28,6 +28,10 @@ div id="#{dom_id post}"
   p 
     strong Likes:
     =< post.get_likes.size
+  
+  turbo-frame id="post_comments#{post.id}"
+    p
+      = link_to "View comments", post_comments_path(post.id)
     
   - if current_user
     = button_to "Like", like_site_post_path(post), method: :patch

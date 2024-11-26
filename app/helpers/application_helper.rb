@@ -1,5 +1,8 @@
 module ApplicationHelper
-  def sortable(column, title = nil)
+  include Pagy::Frontend
+  
+  def sortable(column, title = nil, params)
+    # debugger if column == "user_name"
     title ||= column.titleize
 
     if column == "title"
@@ -15,6 +18,6 @@ module ApplicationHelper
                end
 
     # Generate the link
-    link_to title, { sort: column, direction: direction, class: "sortable" }, data: { turbo_frame: "posts" }
+    link_to title, { sort: column, direction: direction, class: "sortable" }.merge!(params.permit!.reject {|p| ["direction","sort","class"].include?(p) }), data: { turbo_frame: "posts" }
   end
 end

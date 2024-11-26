@@ -3,12 +3,20 @@ turbo-frame#posts
 
   h1 Posts
 
+  h2 Posts : #{@posts.count}/#{Post.count}
+
+  == pagy_nav(@pagy)
+  
+
   - if current_administrator
     = current_administrator.email
   - else
     h2 No logged in admin.
 
   = form_with url: admin_posts_path, method: :get, data: { turbo_frame: 'posts' } do |f|
+    = f.hidden_field :direction, value: params[:direction]
+    = f.hidden_field :sort, value: params[:sort]
+    = f.hidden_field :class, value: params[:class]
     = f.text_field :email, placeholder: "Search by email", value: params[:email]
     = f.text_field :search_string, placeholder: "Search by title or content", value: params[:search_string]
 
@@ -32,14 +40,14 @@ turbo-frame#posts
   table 
     thead 
       tr 
-        th = sortable("user_name", "User Name")
-        th = sortable("title", "Title")
-        th = sortable("content", "Content")
-        th = sortable("publish_date", "Publish Date")
+        th = sortable("user_name", "User Name", params)
+        th = sortable("title", "Title", params)
+        th = sortable("content", "Content", params)
+        th = sortable("publish_date", "Publish Date", params)
         th Active
         th Featured
-        th = sortable("permalink", "Permalink")
-        th "Action" 
+        th = sortable("permalink", "Permalink", params)
+        th Action
     tbody 
       - if @has_records
         - if @posts.present?

@@ -1,0 +1,10 @@
+turbo-frame id="new_comment#{@post.id}"
+  h1 New comment
+  
+  div id="form_comment#{@post.id}"
+    == render "form", comment: @comment
+
+  br
+
+  div
+    = link_to "Back to comments", comments_path

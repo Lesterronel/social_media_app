@@ -6,6 +6,7 @@ devise_for :users,
 
 namespace :site, path: '/' do
     resources :posts do
+        resources :comments, only: [:new, :create] 
         member do
             post :edit
             get :content_full

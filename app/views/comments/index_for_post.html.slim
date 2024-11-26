@@ -1,0 +1,19 @@
+turbo-frame id="post_comments#{@post.id}"
+    h1 Comments for #{@post.name}
+
+    - if @comments.present?
+        div id="comments#{@post.id}"
+            - @comments.each do |comment|
+                p
+                    = comment.content
+                    br
+        - if current_user
+            turbo-frame id="new_comment#{@post.id}"
+                = link_to "Create new comment", post_new_comments_path(@post.id)
+        - else 
+            = link_to "Create new comment", new_user_session_path, data: { turbo: false }
+    - else
+        div id="comments#{@post.id}"
+            p No comments found.
+        turbo-frame id="new_comment#{@post.id}"
+            = link_to "Create new comment", post_new_comments_path(@post.id)

@@ -9,6 +9,7 @@ class Post < ApplicationRecord
     validates :content, presence: true, length: { maximum: 1500 }
     validates :publish_date, presence: true
     belongs_to :user
+    has_many :comment
 
     # scopes for admin search and sorting
     scope :for_datatables, -> { select(:id, :name, :content, :publish_date, :active, :featured, :permalink, :user_id) }

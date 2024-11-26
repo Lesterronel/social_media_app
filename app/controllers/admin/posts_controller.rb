@@ -16,15 +16,16 @@ module Admin
         sort_direction = ALLOWED_DIRECTIONS.include?(params[:direction]) ? params[:direction] : 'asc' # default to 'asc' if invalid
 
         # Perform actions if both params exist
-        @posts = Post.filter(
-            params.slice(:search_string, :active, :featured, :email), 
-            params[:order_by].presence
-          ).for_datatables.filter_by_publish_date(params[:date_from], params[:date_to]).order_by_column(sort_column, sort_direction)
+        @pagy, @posts = pagy(Post.filter(
+              params.slice(:search_string, :active, :featured, :email), 
+              params[:order_by].presence
+            ).for_datatables.filter_by_publish_date(params[:date_from], params[:date_to]).order_by_column(sort_column, sort_direction)
+          )
       else
-        @posts = Post.filter(
+        @pagy, @posts = pagy(Post.filter(
             params.slice(:search_string, :active, :featured, :email), 
             params[:order_by].presence
-          ).for_datatables.filter_by_publish_date(params[:date_from], params[:date_to]
+          ).for_datatables.filter_by_publish_date(params[:date_from], params[:date_to])
         )
       end
     end

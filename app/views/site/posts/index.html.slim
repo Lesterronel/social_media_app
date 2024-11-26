@@ -2,6 +2,10 @@
 
 h1 Posts
 
+h2 Posts : #{@posts.count}/#{Post.count}
+
+== pagy_nav(@pagy)
+
 #new_post
   = render partial: "form", locals: {post: Post.new}  
 br
@@ -18,4 +22,4 @@ br
     = render post
     br
 
-= link_to "New post", new_site_post_path
+/ = link_to "New post", new_site_post_path

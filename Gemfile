@@ -18,8 +18,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'slim-rails'
-
 gem 'acts_as_votable'
+gem 'pagy'
+gem 'faker'
+# gem 'bootstrap', '~> 5.0.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

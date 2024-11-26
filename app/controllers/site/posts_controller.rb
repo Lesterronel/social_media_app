@@ -5,7 +5,7 @@ module Site
 
     # GET /posts or /posts.json
     def index
-      @posts = Post.all.order(publish_date: :desc)
+      @pagy, @posts = pagy(Post.all.order(publish_date: :desc))
     end
 
     def like 
